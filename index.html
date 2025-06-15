@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>관심사 기반 SNS</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e6ecf0;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 1rem;
+      background: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 1.5rem;
+      color: #1da1f2;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    select, button {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+    }
+    button {
+      background-color: #1da1f2;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0d8ddb;
+    }
+    .post {
+      border-bottom: 1px solid #ddd;
+      padding: 1rem 0;
+    }
+    .post:last-child {
+      border-bottom: none;
+    }
+    .username {
+      font-weight: bold;
+      color: #1da1f2;
+    }
+    .content {
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>맞춤형 SNS 피드</h1>
+    <label for="interest">관심사를 선택하세요:</label>
+    <select id="interest">
+      <option value="tech">기술</option>
+      <option value="sports">스포츠</option>
+      <option value="art">예술</option>
+      <option value="fashion">패션</option>
+    </select>
+    <button onclick="generatePost()">글 생성하기</button>
+
+    <div id="feed"></div>
+  </div>
+
+  <script>
+    const posts = {
+      tech: [
+        "📱 새로운 스마트폰이 출시되었대요! 화면도 더 넓어졌고, AI 기능도 탑재되었다네요.",
+        "🤖 인공지능이 이제 그림까지 그린다고?! 너무 신기하다.",
+        "🌐 웹3.0 시대에선 개인 정보가 훨씬 더 중요해질 거라고 해요."
+      ],
+      sports: [
+        "⚽ 오늘 경기 미쳤다... 막판 역전골에 눈물났음.",
+        "🏀 르브론 제임스는 진짜 전설이다. 한 경기에서 이렇게 많이 넣다니.",
+        "🎾 테니스 보면서 이렇게 소리질러본 적 처음임ㅋㅋ"
+      ],
+      art: [
+        "🎨 고흐의 색감은 볼 때마다 놀랍다. 생생하고 강렬해.",
+        "🖼️ 오늘 미술관 갔다왔는데, 현대미술 진짜 난해하다...",
+        "📷 감성사진 찍는 법 좀 알려주세요 ㅠㅠ #아날로그"
+      ],
+      fashion: [
+        "👗 여름 맞이 데일리룩 정리했어요~ #OOTD",
+        "👟 이 신발 요즘 유행이라는데 다들 뭐 신어요?",
+        "🧥 미니멀룩에 빠졌습니다. 옷장도 미니멀하게 정리 중!"
+      ]
+    };
+
+    function generatePost() {
+      const interest = document.getElementById('interest').value;
+      const feed = document.getElementById('feed');
+      const options = posts[interest];
+      const random = options[Math.floor(Math.random() * options.length)];
+
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+      postElement.innerHTML = `
+        <div class="username">@user123</div>
+        <div class="content">${random}</div>
+      `;
+      feed.prepend(postElement);
+    }
+  </script>
+</body>
+</html>
